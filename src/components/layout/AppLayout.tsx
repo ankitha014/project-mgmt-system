@@ -11,7 +11,7 @@ export function AppLayout({ children, transparentBackground = false }: AppLayout
   return (
     <div
       className={`flex min-h-screen w-full ${
-        transparentBackground ? 'bg-transparent' : 'bg-background premium-bg'
+        transparentBackground ? 'bg-transparent' : 'dashboard-bg text-foreground'
       }`}
     >
       <AppSidebar />

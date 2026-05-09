@@ -20,6 +20,26 @@ export async function fetchAllTasks() {
   return data as unknown as Task[];
 }
 
+export async function fetchAllTasksByWorkspace(workspaceId: string) {
+  // Fetch all project IDs belonging to this workspace
+  const { data: projects, error: projErr } = await supabase
+    .from('projects')
+    .select('id')
+    .eq('workspace_id', workspaceId);
+  if (projErr) throw projErr;
+
+  const projectIds = (projects ?? []).map((p: { id: string }) => p.id);
+  if (projectIds.length === 0) return [];
+
+  const { data, error } = await supabase
+    .from('tasks')
+    .select('*')
+    .in('project_id', projectIds)
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return data as unknown as Task[];
+}
+
 export async function createTask(task: {
   project_id: string;
   title: string;

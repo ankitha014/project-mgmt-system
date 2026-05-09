@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['Cormorant Garamond', 'EB Garamond', 'Garamond', 'Georgia', 'serif'],
+        heading: ['Outfit', 'system-ui', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['Cormorant Garamond', 'EB Garamond', 'Garamond', 'Georgia', 'serif'],
+        serif: ['Outfit', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         soft: 'var(--shadow-soft)',

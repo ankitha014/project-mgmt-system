@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppLayout } from '@/components/layout/AppLayout';
-import { PageBackground } from '@/components/layout/PageBackground';
 import {
   useNotifications,
   useMarkNotificationRead,
@@ -86,7 +85,7 @@ export default function Notifications() {
   };
 
   return (
-    <AppLayout transparentBackground><PageBackground />
+    <AppLayout>
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">

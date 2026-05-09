@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
-import { format, formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow } from 'date-fns';
 import { Activity, Loader2 } from 'lucide-react';
+import { useWorkspace } from '@/contexts/WorkspaceContext';
+import { useRealtimeSubscription } from '@/hooks/useRealtimeSubscription';
+import { fetchRecentActivityByWorkspace } from '@/services/api/activity';
 
 interface ActivityItem {
   id: string;
@@ -10,16 +12,6 @@ interface ActivityItem {
   metadata: Record<string, unknown> | null;
   created_at: string;
   project_id: string;
-}
-
-async function fetchRecentActivity() {
-  const { data, error } = await supabase
-    .from('activity_log')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .limit(10);
-  if (error) throw error;
-  return data as unknown as ActivityItem[];
 }
 
 function getActivityIcon(action: string) {
@@ -40,9 +32,19 @@ function getActivityText(item: ActivityItem) {
 }
 
 export function ActivityFeed() {
+  const { currentWorkspace } = useWorkspace();
+  const workspaceId = currentWorkspace?.id;
+
+  // Re-fetch whenever any activity_log row changes in this workspace
+  useRealtimeSubscription({
+    table: 'activity_log',
+    queryKeys: [['recent-activity', workspaceId]],
+  });
+
   const { data: activities = [], isLoading } = useQuery({
-    queryKey: ['recent-activity'],
-    queryFn: fetchRecentActivity,
+    queryKey: ['recent-activity', workspaceId],
+    queryFn: () => fetchRecentActivityByWorkspace(workspaceId!),
+    enabled: !!workspaceId,
   });
 
   return (

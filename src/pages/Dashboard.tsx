@@ -1,5 +1,4 @@
 import { AppLayout } from '@/components/layout/AppLayout';
-import { PageBackground } from '@/components/layout/PageBackground';
 import { StatsCard } from '@/components/dashboard/StatsCard';
 import { ActivityFeed } from '@/components/dashboard/ActivityFeed';
 import { RecentProjects } from '@/components/dashboard/RecentProjects';
@@ -19,7 +18,7 @@ export default function Dashboard() {
   const pendingTasks = tasks.filter(t => t.status !== 'completed');
 
   return (
-    <AppLayout transparentBackground><PageBackground />
+    <AppLayout>
       <div className="mb-8">
         <h1 className="font-heading text-3xl font-bold text-foreground">
           <TypingText text={`Welcome back${user?.user_metadata?.full_name ? `, ${user.user_metadata.full_name}` : ''}`} />

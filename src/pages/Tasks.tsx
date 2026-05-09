@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { AppLayout } from '@/components/layout/AppLayout';
-import { PageBackground } from '@/components/layout/PageBackground';
 import { useAllTasks, useCreateTask } from '@/hooks/useTasks';
 import { useProjects } from '@/hooks/useProjects';
 import { useAuth } from '@/contexts/AuthContext';
@@ -8,8 +7,9 @@ import { TaskCard } from '@/components/tasks/TaskCard';
 import { TaskFilters, useTaskFilters, applyTaskFilters } from '@/components/tasks/TaskFilters';
 import { TaskModal } from '@/components/tasks/TaskModal';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
+import { Plus, Calendar as CalendarIcon } from 'lucide-react';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 import type { TaskPriority, TaskStatus } from '@/types';
 import { TypingText } from '@/components/ui/typing-text';
 
@@ -20,6 +20,7 @@ export default function Tasks() {
   const { user } = useAuth();
   const { filters, setFilters } = useTaskFilters();
   const [modalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handler = () => setModalOpen(true);
@@ -55,15 +56,20 @@ export default function Tasks() {
   };
 
   return (
-    <AppLayout transparentBackground><PageBackground />
+    <AppLayout>
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-heading text-3xl font-bold text-foreground"><TypingText text="All Tasks" /></h1>
           <p className="text-muted-foreground mt-1">View tasks across all projects</p>
         </div>
-        <Button onClick={() => setModalOpen(true)}>
-          <Plus size={16} className="mr-2" /> New Task
-        </Button>
+        <div className="flex items-center gap-3">
+          <Button variant="outline" onClick={() => navigate('/calendar')} className="glass-panel">
+            <CalendarIcon size={16} className="mr-2" /> View Calendar
+          </Button>
+          <Button onClick={() => setModalOpen(true)}>
+            <Plus size={16} className="mr-2" /> New Task
+          </Button>
+        </div>
       </div>
 
       <div className="mb-6">

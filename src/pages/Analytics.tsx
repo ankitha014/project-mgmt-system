@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { AppLayout } from '@/components/layout/AppLayout';
-import { PageBackground } from '@/components/layout/PageBackground';
 import { useProjects } from '@/hooks/useProjects';
 import { useAllTasks } from '@/hooks/useTasks';
 import { useAuth } from '@/contexts/AuthContext';
@@ -58,7 +57,7 @@ export default function Analytics() {
   }, [tasks, projects]);
 
   return (
-    <AppLayout transparentBackground><PageBackground />
+    <AppLayout>
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-1">
           <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">

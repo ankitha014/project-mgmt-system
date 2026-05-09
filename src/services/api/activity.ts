@@ -25,6 +25,21 @@ export async function fetchActivityLog(projectId: string, limit = 50) {
   })) as unknown as ActivityLog[];
 }
 
+/**
+ * Fetch recent activity scoped to a workspace by joining through the projects table.
+ * Uses a Supabase foreign-table filter so no schema changes are required.
+ */
+export async function fetchRecentActivityByWorkspace(workspaceId: string, limit = 10) {
+  const { data, error } = await supabase
+    .from('activity_log')
+    .select('*, projects!inner(workspace_id)')
+    .eq('projects.workspace_id', workspaceId)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+  if (error) throw error;
+  return (data || []) as unknown as ActivityLog[];
+}
+
 export async function logActivity(entry: {
   project_id: string;
   user_id: string;

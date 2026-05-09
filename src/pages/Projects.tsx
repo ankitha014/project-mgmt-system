@@ -1,7 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppLayout } from '@/components/layout/AppLayout';
-import { PageBackground } from '@/components/layout/PageBackground';
 import { useProjects, useCreateProject } from '@/hooks/useProjects';
 import { useCreateTask } from '@/hooks/useTasks';
 import { useAllTasks } from '@/hooks/useTasks';
@@ -12,7 +11,7 @@ import { CreateProjectButton } from '@/components/projects/CreateProjectButton';
 import { TemplatePickerModal } from '@/components/projects/TemplatePickerModal';
 import type { ProjectTemplate } from '@/services/api/templates';
 import { Button } from '@/components/ui/button';
-import { Search, X, FileText, ArrowUpDown } from 'lucide-react';
+import { Search, X, FileText, ArrowUpDown, Calendar as CalendarIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
@@ -92,13 +91,16 @@ export default function Projects() {
   };
 
   return (
-    <AppLayout transparentBackground><PageBackground />
+    <AppLayout>
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-heading text-3xl font-bold text-foreground"><TypingText text="Projects" /></h1>
           <p className="text-muted-foreground mt-1">Manage all your projects</p>
         </div>
         <div className="flex gap-2">
+          <Button variant="outline" onClick={() => navigate('/calendar')} className="glass-panel">
+            <CalendarIcon size={16} className="mr-2" /> View Calendar
+          </Button>
           <Button variant="outline" onClick={() => setTemplateModalOpen(true)}>
             <FileText size={16} className="mr-2" /> From Template
           </Button>

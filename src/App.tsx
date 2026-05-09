@@ -16,7 +16,9 @@ import SettingsPage from "./pages/Settings";
 import WorkspaceSettingsPage from "./pages/WorkspaceSettingsPage";
 import Notifications from "./pages/Notifications";
 import Analytics from "./pages/Analytics";
+import CalendarPage from "./pages/CalendarPage";
 import NotFound from "./pages/NotFound";
+import Landing from "./pages/Landing";
 import { KeyboardShortcutsProvider } from "./components/keyboard/KeyboardShortcutsProvider";
 
 const queryClient = new QueryClient();
@@ -38,7 +40,7 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/" element={<PublicRoute><Landing /></PublicRoute>} />
       <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
       <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
       <Route path="/welcome" element={<ProtectedRoute><WorkspaceProvider><Welcome /></WorkspaceProvider></ProtectedRoute>} />
@@ -50,6 +52,7 @@ function AppRoutes() {
       <Route path="/workspace-settings" element={<ProtectedRoute><WorkspaceProvider><WorkspaceSettingsPage /></WorkspaceProvider></ProtectedRoute>} />
       <Route path="/notifications" element={<ProtectedRoute><WorkspaceProvider><Notifications /></WorkspaceProvider></ProtectedRoute>} />
       <Route path="/analytics" element={<ProtectedRoute><WorkspaceProvider><Analytics /></WorkspaceProvider></ProtectedRoute>} />
+      <Route path="/calendar" element={<ProtectedRoute><WorkspaceProvider><CalendarPage /></WorkspaceProvider></ProtectedRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

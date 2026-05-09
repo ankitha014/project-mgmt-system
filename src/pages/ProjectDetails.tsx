@@ -299,6 +299,7 @@ export default function ProjectDetails() {
         <TabsContent value="calendar">
           <TaskCalendar
             tasks={filteredTasks}
+            projects={project ? [project] : []}
             onTaskClick={handleTaskClick}
           />
         </TabsContent>

@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchTasks, fetchAllTasks, createTask, updateTask, updateTaskStatus, deleteTask } from '@/services/api/tasks';
+import { fetchTasks, fetchAllTasks, fetchAllTasksByWorkspace, createTask, updateTask, updateTaskStatus, deleteTask } from '@/services/api/tasks';
 import { useRealtimeSubscription } from '@/hooks/useRealtimeSubscription';
+import { useWorkspace } from '@/contexts/WorkspaceContext';
 import type { TaskStatus } from '@/types';
 
 export function useTasks(projectId: string) {
@@ -18,14 +19,18 @@ export function useTasks(projectId: string) {
 }
 
 export function useAllTasks() {
+  const { currentWorkspace } = useWorkspace();
+  const workspaceId = currentWorkspace?.id;
+
   useRealtimeSubscription({
     table: 'tasks',
-    queryKeys: [['all-tasks']],
+    queryKeys: [['all-tasks', workspaceId]],
   });
 
   return useQuery({
-    queryKey: ['all-tasks'],
-    queryFn: fetchAllTasks,
+    queryKey: ['all-tasks', workspaceId],
+    queryFn: () => workspaceId ? fetchAllTasksByWorkspace(workspaceId) : fetchAllTasks(),
+    enabled: !!workspaceId,
   });
 }
 

@@ -28,7 +28,7 @@ const actions = [
     icon: CalendarDays,
     color: 'bg-sky-500/10 text-sky-600 dark:text-sky-400',
     event: null,
-    navigate: '/tasks',
+    navigate: '/calendar',
   },
 ] as const;
 

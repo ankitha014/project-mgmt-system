@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { ProjectFlowLogo } from '@/components/branding/ProjectFlowLogo';
+import { WorkSprint_HubLogo } from '@/components/branding/WorkSprint_HubLogo';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
@@ -34,9 +34,9 @@ export default function Signup() {
       <div className="w-full max-w-sm glass-panel glass-in p-8">
         <div className="relative z-10">
           <div className="text-center mb-8">
-            <ProjectFlowLogo containerClassName="justify-center mb-4" />
+            <WorkSprint_HubLogo containerClassName="justify-center mb-4" />
             <h1 className="font-heading text-2xl font-bold text-foreground">Create account</h1>
-            <p className="text-muted-foreground text-sm mt-1">Get started with ProjectFlow</p>
+            <p className="text-muted-foreground text-sm mt-1">Get started with Worksprint Hub</p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>

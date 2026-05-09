@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import projectFlowLogoImage from '@/assets/projectflow-logo.jpeg';
 
-type ProjectFlowLogoProps = {
+type WorkSprint_HubLogoProps = {
   showWordmark?: boolean;
   variant?: 'trajectory' | 'facet' | 'grid';
   containerClassName?: string;
@@ -10,14 +10,14 @@ type ProjectFlowLogoProps = {
   wordmarkClassName?: string;
 };
 
-export function ProjectFlowLogo({
+export function WorkSprint_HubLogo({
   showWordmark = false,
   variant: _variant = 'trajectory',
   containerClassName,
   iconWrapClassName,
   iconClassName,
   wordmarkClassName,
-}: ProjectFlowLogoProps) {
+}: WorkSprint_HubLogoProps) {
   return (
     <div className={cn('flex items-center gap-3', containerClassName)}>
       <div
@@ -37,8 +37,8 @@ export function ProjectFlowLogo({
       </div>
 
       {showWordmark && (
-        <span className={cn('font-heading text-lg font-bold text-foreground', wordmarkClassName)}>
-          ProjectFlow
+        <span className={cn('font-heading text-xl font-bold tracking-wide text-foreground', wordmarkClassName)}>
+          Worksprint Hub
         </span>
       )}
     </div>

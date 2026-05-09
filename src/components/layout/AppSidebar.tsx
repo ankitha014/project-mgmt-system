@@ -1,17 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, FolderKanban, CheckSquare, Settings, LogOut, ChevronLeft, ChevronRight, Building2, Bell, BarChart3 } from 'lucide-react';
+import { LayoutDashboard, FolderKanban, CheckSquare, Settings, LogOut, ChevronLeft, ChevronRight, Building2, Bell, BarChart3, Calendar } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { NotificationBell } from '@/components/notifications/NotificationBell';
 import { WorkspaceSwitcher } from '@/components/workspace/WorkspaceSwitcher';
 import { TimerWidget } from '@/components/time/TimerWidget';
-import { ProjectFlowLogo } from '@/components/branding/ProjectFlowLogo';
+import { WorkSprint_HubLogo } from '@/components/branding/WorkSprint_HubLogo';
 
 const navItems = [
   { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
   { label: 'Projects', icon: FolderKanban, path: '/projects' },
   { label: 'Tasks', icon: CheckSquare, path: '/tasks' },
+  { label: 'Calendar', icon: Calendar, path: '/calendar' },
   { label: 'Analytics', icon: BarChart3, path: '/analytics' },
   { label: 'Notifications', icon: Bell, path: '/notifications' },
   { label: 'Workspace', icon: Building2, path: '/workspace-settings' },
@@ -31,7 +32,7 @@ export function AppSidebar() {
       <div className="flex items-center justify-between p-4 border-b border-sidebar-border">
         {!collapsed && (
           <Link to="/dashboard" className="flex items-center gap-2">
-            <ProjectFlowLogo
+            <WorkSprint_HubLogo
               showWordmark
               iconWrapClassName="h-8 w-8 rounded-lg"
               iconClassName="h-4 w-4"
