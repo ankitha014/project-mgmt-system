@@ -41,20 +41,36 @@ export function ProjectProgressChart({ tasks, projects }: Props) {
   return (
     <ResponsiveContainer width="100%" height={280}>
       <BarChart data={data} margin={{ top: 8, right: 8, bottom: 8, left: -16 }} layout="horizontal">
-        <XAxis dataKey="name" tick={{ fontSize: 11, fill: 'hsl(220, 10%, 46%)' }} axisLine={false} tickLine={false} />
-        <YAxis tick={{ fontSize: 11, fill: 'hsl(220, 10%, 46%)' }} axisLine={false} tickLine={false} allowDecimals={false} />
+        <XAxis 
+          dataKey="name" 
+          tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} 
+          axisLine={false} 
+          tickLine={false} 
+        />
+        <YAxis 
+          tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} 
+          axisLine={false} 
+          tickLine={false} 
+          allowDecimals={false} 
+        />
         <Tooltip
           contentStyle={{
-            background: 'hsl(0, 0%, 100%)',
-            border: '1px solid hsl(220, 13%, 91%)',
+            backgroundColor: 'hsl(var(--card))',
+            border: '1px solid hsl(var(--border))',
             borderRadius: '0.75rem',
             fontSize: 13,
+            color: 'hsl(var(--foreground))',
           }}
+          itemStyle={{ color: 'hsl(var(--foreground))' }}
         />
-        <Legend iconType="circle" wrapperStyle={{ fontSize: 12 }} />
+        <Legend 
+          iconType="circle" 
+          wrapperStyle={{ fontSize: 12, paddingTop: '10px' }} 
+          formatter={(value) => <span style={{ color: 'hsl(var(--foreground))' }}>{value}</span>}
+        />
         <Bar dataKey="completed" stackId="a" fill="hsl(142, 71%, 45%)" radius={[0, 0, 0, 0]} maxBarSize={40} name="Done" />
         <Bar dataKey="inProgress" stackId="a" fill="hsl(38, 92%, 50%)" radius={[0, 0, 0, 0]} maxBarSize={40} name="In Progress" />
-        <Bar dataKey="todo" stackId="a" fill="hsl(220, 15%, 92%)" radius={[6, 6, 0, 0]} maxBarSize={40} name="To Do" />
+        <Bar dataKey="todo" stackId="a" fill="hsl(45, 80%, 90%)" radius={[6, 6, 0, 0]} maxBarSize={40} name="To Do" />
       </BarChart>
     </ResponsiveContainer>
   );

@@ -35,16 +35,28 @@ export function ProductivityChart({ tasks }: Props) {
   return (
     <ResponsiveContainer width="100%" height={280}>
       <LineChart data={data} margin={{ top: 8, right: 8, bottom: 8, left: -16 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 13%, 91%)" />
-        <XAxis dataKey="date" tick={{ fontSize: 11, fill: 'hsl(220, 10%, 46%)' }} axisLine={false} tickLine={false} />
-        <YAxis tick={{ fontSize: 11, fill: 'hsl(220, 10%, 46%)' }} axisLine={false} tickLine={false} allowDecimals={false} />
+        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border) / 0.5)" />
+        <XAxis 
+          dataKey="date" 
+          tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} 
+          axisLine={false} 
+          tickLine={false} 
+        />
+        <YAxis 
+          tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} 
+          axisLine={false} 
+          tickLine={false} 
+          allowDecimals={false} 
+        />
         <Tooltip
           contentStyle={{
-            background: 'hsl(0, 0%, 100%)',
-            border: '1px solid hsl(220, 13%, 91%)',
+            backgroundColor: 'hsl(var(--card))',
+            border: '1px solid hsl(var(--border))',
             borderRadius: '0.75rem',
             fontSize: 13,
+            color: 'hsl(var(--foreground))',
           }}
+          itemStyle={{ color: 'hsl(var(--foreground))' }}
         />
         <Line type="monotone" dataKey="created" stroke="hsl(245, 58%, 51%)" strokeWidth={2} dot={false} name="Created" />
         <Line type="monotone" dataKey="completed" stroke="hsl(142, 71%, 45%)" strokeWidth={2} dot={false} name="Completed" />
